@@ -278,23 +278,32 @@ Any LLM Platform (OpenAI, Gemini, Claude, Slack bot, custom app...)
 
 Set up your Voices once. Your trust network travels with you everywhere.
 
-### Future
+### Future: Personal Context from Devices
+
+Voices provide the *guidance*. The next layer is *context* -- real-time data from the user's own devices so the AI understands their situation, not just the rules.
+
+- **Health devices** -- Fitbit, Garmin, Apple Health, Google Fit. Your coach's guidance meets your actual heart rate, sleep, and training load.
+- **Calendar** -- Google Calendar, Outlook. Your caregiver's reminder rules meet your actual schedule.
+- **Smart home** -- sensors, medication trackers, activity monitors. Context like "no movement since 8am" triggers the right Voice's safety rules.
+
+All data stays local. Voices set the rules, devices provide the facts, the AI puts them together.
+
+### Future: More
 - [ ] Guidance prefetch and per-question API
 - [ ] MCP server with real-time subscription for guideline updates
 - [ ] Browser extension for ChatGPT, Claude, Gemini
 - [ ] Compass for Providers (B2B platform)
 - [ ] Self-hosted LLM support
-- [ ] Real data integrations (Google Calendar, Fitbit, Strava)
 - [ ] Guideline conflict detection across Voices
 
 ---
 
-## Contact
+## Open Source
 
-Compass is proprietary software. For inquiries about partnerships, integrations, or licensing, reach out to the author.
+Compass will be open-sourced so the community can own its evolution. The core belief: **how AI is guided by trusted humans should be a shared standard, not a proprietary lock-in.** We want developers, healthcare providers, educators, and families to build on this together.
 
 ---
 
 ## License
 
-All rights reserved. This is proprietary software. Unauthorized copying, distribution, or modification is prohibited.
+License will be updated when the project is open-sourced.
