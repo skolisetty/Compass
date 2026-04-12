@@ -2,7 +2,7 @@
 
 **The people who know you best guide how AI talks to you.**
 
-Compass is an open-source guidance network where your trusted people -- doctors, teachers, coaches, family -- shape how any AI interacts with you. The AI doesn't give its own opinions. It channels the wisdom of the people you actually trust.
+Compass is a guidance network where your trusted people -- doctors, teachers, coaches, family -- shape how any AI interacts with you. The AI doesn't give its own opinions. It channels the wisdom of the people you actually trust.
 
 ---
 
@@ -245,71 +245,56 @@ compass/
 - [ ] Output validation (catch hallucination, enforce safety rules post-LLM)
 - [ ] Audit logging
 
-### Upcoming: Export Guidance to Any Platform via MCP
+### Upcoming: Guidance Portability
 
-The most important upcoming feature is **guidance portability**. Your Voices' guidance shouldn't be locked inside Compass -- it should follow you to every AI you use.
-
-**MCP Server (Model Context Protocol):** Compass will expose an MCP server that any compatible LLM client (Claude Desktop, Cursor, custom apps) can connect to. The MCP tools will include:
-
-- `check_guidance(question)` -- send a user's question, get back applicable guidance from their Voices or an empty response if none applies
-- `get_voices()` -- list the user's active Voices and their domains
-- `get_guidelines(domain)` -- retrieve guidelines for a specific domain
-
-**Guidance API:** A REST endpoint (`POST /api/guidance/check`) that any application can call. Send a question, receive a guidance payload that can be injected into any LLM's system prompt -- OpenAI, Anthropic, Google Gemini, Mistral, or your own self-hosted model.
-
-**How it works:** When a third-party platform calls Compass, the internal guidance engine classifies the question, retrieves relevant Voice guidelines, and returns a structured payload. The calling platform injects this into their LLM prompt. If no guidance applies, Compass returns empty and the platform proceeds normally -- zero interference.
+Your Voices' guidance shouldn't be locked inside Compass. The next milestone is a **Guidance API and MCP server** so any LLM platform can pull your Voices' guidance and apply it -- OpenAI, Gemini, Claude, Slack bots, healthcare portals, anything. Platforms can prefetch all guidance at session start or check per question. If no guidance applies, Compass returns empty -- zero interference.
 
 ```
-User asks a question on any platform
+Any LLM Platform (OpenAI, Gemini, Claude, Slack bot, custom app...)
+          |
+          |  Prefetch at session start OR check per question
+          v
+    Compass Guidance API / MCP Server
           |
           v
-Platform calls Compass API/MCP
-          |
-          v
-Compass classifies question → matches domains
+    Retrieves Voice guidelines from DB
           |
     ┌─────┴─────┐
     |           |
  Guidance    No guidance
- found       found
+ found       applies
     |           |
     v           v
  Return       Return empty
- payload      (platform proceeds
- with Voice   normally)
- guidelines
+ guidance     (platform proceeds
+ payload      with no changes)
     |
     v
-Platform injects guidance into their LLM prompt
+ Platform injects into its own LLM system prompt
           |
           v
-User gets a guided response on their preferred platform
+ User gets a guided response -- on any platform, any LLM
 ```
 
-**The result:** A user sets up their Voices once in Compass. From that point on, their doctor's safety rules, their coach's training plan, and their teacher's classroom strategies are applied everywhere -- ChatGPT, Claude, Gemini, company Slack bots, healthcare portals, education platforms. The guidance is portable. The trust network travels with the user.
+Set up your Voices once. Your trust network travels with you everywhere.
 
 ### Future
-- [ ] Browser extension to inject guidance into ChatGPT, Claude, Gemini
-- [ ] Compass for Providers (B2B platform with templates, compliance, and LLM recommendations)
-- [ ] Self-hosted LLM support with fine-tuning from guidance data
-- [ ] Real data integrations: Google Calendar, Fitbit, Strava, Health Connect
+- [ ] Guidance prefetch and per-question API
+- [ ] MCP server with real-time subscription for guideline updates
+- [ ] Browser extension for ChatGPT, Claude, Gemini
+- [ ] Compass for Providers (B2B platform)
+- [ ] Self-hosted LLM support
+- [ ] Real data integrations (Google Calendar, Fitbit, Strava)
 - [ ] Guideline conflict detection across Voices
-- [ ] Multi-language support
 
 ---
 
-## Contributing
+## Contact
 
-Compass is open source. The core insight -- that AI should be guided by trusted humans, not its own training data -- is simple, but the implications are deep. Contributions welcome across:
-
-- **New Voice types** (therapist templates, dietitian guidance, etc.)
-- **LLM providers** (Anthropic, Ollama, local models)
-- **Integration layers** (browser extensions, MCP server, API proxy)
-- **Privacy and security** (posture filtering, encryption, audit)
-- **Frontend** (mobile responsiveness, accessibility, onboarding flows)
+Compass is proprietary software. For inquiries about partnerships, integrations, or licensing, reach out to the author.
 
 ---
 
 ## License
 
-MIT
+All rights reserved. This is proprietary software. Unauthorized copying, distribution, or modification is prohibited.
