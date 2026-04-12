@@ -69,12 +69,20 @@ export default function App() {
       </nav>
 
       {/* Page content */}
-      <main className="flex-1 overflow-hidden">
+      <main className="flex-1 min-h-0">
         {page === "chat" && (
-          <ChatPage userId={userId} userName={persona.name} />
+          <ChatPage key={userId} userId={userId} userName={persona.name} />
         )}
-        {page === "overview" && <OverviewPage userId={userId} />}
-        {page === "voices" && <VoicePage userId={userId} />}
+        {page === "overview" && (
+          <div className="h-full overflow-y-auto">
+            <OverviewPage key={userId} userId={userId} />
+          </div>
+        )}
+        {page === "voices" && (
+          <div className="h-full overflow-y-auto">
+            <VoicePage key={userId} userId={userId} />
+          </div>
+        )}
       </main>
     </div>
   );
