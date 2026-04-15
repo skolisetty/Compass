@@ -1,23 +1,31 @@
 # Compass
 
-**The people who know you best guide how AI talks to you.**
+**A framework for the "Human-on-the-Loop" era -- the people who know you best guide how AI acts for you.**
 
-Compass is a guidance network where your trusted people -- doctors, teachers, coaches, family -- shape how any AI interacts with you. The AI doesn't give its own opinions. It channels the wisdom of the people you actually trust.
+As AI shifts from chatbots to autonomous agents, we face an Alignment Gap: generic models are trained on the "average" of the internet, but your life isn't average. Your health needs, your parenting style, and your professional ethics are specific. Compass is a guidance network that closes this gap. Your trusted people -- doctors, teachers, coaches, family -- shape how any AI interacts with you. The AI doesn't give its own opinions. It channels the wisdom of the people you actually trust.
 
 ---
 
 ## The Problem
 
-Every AI assistant today is generic. It doesn't know that your doctor said to avoid ibuprofen. It doesn't know your kid's teacher uses a 5-minute warning before transitions. It doesn't know your financial advisor wants you to diversify. So it gives generic advice -- or worse, advice that contradicts the people who actually know your situation.
+Most AI agents today operate on a paternalistic model. They make decisions behind a "black box" of weights and biases. Even with RAG, the user is often left out of the logic chain until the very end. The result is generic advice that doesn't know your doctor said to avoid ibuprofen, doesn't know your kid's teacher uses a 5-minute warning before transitions, and doesn't know your financial advisor wants you to diversify.
+
+If an agent makes a decision for you based on a "generic" understanding of your needs, it isn't just inefficient -- it's a trust failure. It gives advice that contradicts the people who actually know your situation.
 
 ## The Solution
 
-Compass lets trusted individuals deposit their guidance into a system that shapes AI responses in real time. We call these trusted people **Voices**.
+Compass introduces a **Human Layer** into the AI stack, moving us toward a **Human-on-the-Loop** model where trusted people provide the "ground truth" before the agent ever acts. Instead of letting an LLM guess your values, you plug in **Voices** -- pre-defined, human-vetted guidelines from people or institutions you trust.
 
 - A **doctor** sets medication safety rules that no AI can override
 - A **teacher** adds classroom strategies tailored to a specific student
 - A **financial advisor** sets investment guardrails
 - A **grandchild** shares what makes them happy
+
+The framework is built on three pillars:
+
+- **Contextual Plugins:** Voices function as pluggable guidance modules -- your actual doctor, a specific mentor, your family's unique financial principles -- each depositing domain expertise in plain language.
+- **Deterministic Logic Chains:** Before the AI responds, Compass generates a transparent logic chain showing exactly which Voices it is using and what guidelines apply. No black box.
+- **The Veto Window:** Users can see and steer the logic before the agent commits to an action, creating a moment of user autonomy that solves the trust vacuum caused by latency and non-determinism.
 
 The AI becomes a mediator -- not an advisor. When it has relevant guidance from a Voice, it follows it. When it doesn't, it says so and suggests asking the right person.
 
@@ -90,10 +98,10 @@ Compass is **LLM-agnostic**. The guidance layer works with any language model:
 - Guidelines are injected into the system prompt at request time
 - The LLM receives structured instructions from real domain experts, not generic training data
 - Safety rules are enforced both in the prompt and through post-response validation
-- Attribution tracking identifies which guidelines influenced each response
+- Attribution tracking identifies which guidelines influenced each response -- no black box
 - The architecture is designed to work as a proxy layer for any LLM API (OpenAI, Anthropic, Ollama, local models)
 
-**The long-term vision:** Compass becomes infrastructure that sits between users and any AI they interact with -- ChatGPT, Claude, Gemini, company internal tools -- injecting trusted human guidance into every conversation.
+**The long-term vision:** Compass becomes infrastructure that sits between users and any AI they interact with -- ChatGPT, Claude, Gemini, company internal tools -- injecting trusted human guidance into every conversation. We stop treating AI logic as a trade secret and start treating it as a collaborative map.
 
 ---
 
@@ -123,10 +131,11 @@ Voices (trusted people)          Users
 
 ### Key Design Decisions
 
+- **Human-on-the-Loop, not human-out-of-the-loop.** Trusted people provide ground truth before the agent acts, not after.
 - **Guidelines are the product.** The LLM is interchangeable. The value is the trust network.
 - **Dynamic system prompts.** The prompt is built at request time from the guidelines database. What a Voice types is what the LLM sees.
 - **Safety rules can't be overridden.** A doctor's medication contraindication is enforced regardless of what the user asks.
-- **Attribution is transparent.** Every response shows which Voices and guidelines shaped it.
+- **Attribution is transparent.** Every response shows which Voices and guidelines shaped it -- deterministic logic chains, not black-box decisions.
 - **LLM-agnostic.** Swap OpenAI for Ollama, Claude, or your own fine-tuned model via a single config change.
 
 ---
@@ -288,6 +297,10 @@ Voices provide the *guidance*. The next layer is *context* -- real-time data fro
 
 All data stays local. Voices set the rules, devices provide the facts, the AI puts them together.
 
+### Future: Demographic-Specific Models
+
+Compass starts as a tool for personal alignment, but the architectural endgame is larger. By capturing and anonymizing high-signal Voices, we create the foundation for **Demographic-Specific Models.** Currently, models are trained on the noisy web. Imagine instead a model pre-trained on the collective, vetted Voices of verified pediatricians, or a model grounded in the specific legal and ethical standards of a particular professional sector. We move from "one-size-fits-all" AI to specialized, high-integrity models that are inherently good for specific communities because they were built on their trusted guidance.
+
 ### Future: More
 - [ ] Guidance prefetch and per-question API
 - [ ] MCP server with real-time subscription for guideline updates
@@ -295,12 +308,13 @@ All data stays local. Voices set the rules, devices provide the facts, the AI pu
 - [ ] Compass for Providers (B2B platform)
 - [ ] Self-hosted LLM support
 - [ ] Guideline conflict detection across Voices
+- [ ] Anonymized Voice aggregation for demographic model training
 
 ---
 
 ## Open Source
 
-Compass will be open-sourced so the community can own its evolution. The core belief: **how AI is guided by trusted humans should be a shared standard, not a proprietary lock-in.** We want developers, healthcare providers, educators, and families to build on this together.
+Compass will be open-sourced so the community can own its evolution. The core belief: **how AI is guided by trusted humans should be a shared standard, not a proprietary lock-in.** We want developers, healthcare providers, educators, and families to build on this together. By giving users the tools to steer their agents through trusted Voices, we don't just make AI smarter -- we make it an authentic extension of our own networks and values.
 
 ---
 
